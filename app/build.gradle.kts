@@ -1,20 +1,21 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id(Build.androidAplication)
+    id(Kotlin.plugin)
+    id(Kotlin.kaptPlugin)
 }
 
 android {
-    namespace = "com.example.bootcamp"
-    compileSdk = 34
+    namespace = ProjectConfig.appId
+    compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
-        applicationId = "com.example.bootcamp"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = ProjectConfig.appId
+        minSdk = ProjectConfig.minSdk
+        targetSdk = ProjectConfig.tarjetSdk
+        versionCode = ProjectConfig.versionCode
+        versionName = ProjectConfig.getVersionName()
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Build.testInstrumentationRunner
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -40,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = Kotlin.extensionVersion
     }
     packaging {
         resources {
@@ -50,20 +51,30 @@ android {
 }
 
 dependencies {
+    //Android
+    implementation(Android.coreKtx)
+    implementation(Android.lifecycleRuntimeKtx)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    //Compose
+    implementation(Compose.activityCompose)
+    implementation(platform(Compose.composeBom))
+    implementation(Compose.composeUi)
+    implementation(Compose.activityCompose)
+    implementation(Compose.composeGraphics)
+    implementation(Compose.composeToolingPreview)
+    implementation(Compose.composeMaterial3)
+    implementation(Compose.composeLifecycleViewModel)
+    implementation(Compose.composeNavigation)
+    implementation(Compose.composeLifecycle)
+    debugImplementation(Compose.composeUiTooling)
+    debugImplementation(Compose.composeTestManifest)
+
+    //Testing
+    testImplementation(Testing.junit4)
+    androidTestImplementation(Testing.extJunit)
+    androidTestImplementation(Testing.espresso)
+    androidTestImplementation(Testing.composeBomTesting)
+    androidTestImplementation(Testing.composeUiTesting)
+
+
 }
