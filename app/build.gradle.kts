@@ -1,18 +1,22 @@
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
+    id(Kotlin.kaptPlugin)
+    id(DaggerHilt.plugin)
 }
 
 android {
-    namespace = "com.example.bootcamp"
-    compileSdk = 34
+    namespace = ConfigurationData.namespace
+    compileSdk = ConfigurationData.compileSdk
 
     defaultConfig {
-        applicationId = "com.example.bootcamp"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = ConfigurationData.applicationId
+        minSdk = ConfigurationData.minSdk
+        targetSdk = ConfigurationData.targetSdk
+        versionCode = ConfigurationData.versionCode
+        versionName = ConfigurationData.getVersionName()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -34,13 +38,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = ConfigurationData.jvmTarget
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = ConfigurationData.kotlinCompilerExtensionVersion
     }
     packaging {
         resources {
@@ -59,6 +64,37 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    ///////
+
+    implementation(DaggerHilt.hiltAndroid)
+    kapt(DaggerHilt.hiltCompiler)
+
+    implementation(Retrofit.retrofit)
+    implementation(Retrofit.gsonConverter)
+    implementation(platform(Retrofit.okHttpBom))
+    implementation(Retrofit.okHttp)
+    implementation(Retrofit.okHttpLoggingInterceptor)
+
+    implementation(Maps.mapsCompose)
+    implementation(Maps.playServicesMaps)
+
+
+    implementation(Coil.coilCompose)
+
+    //kapt(Room.roomCompiler)
+    implementation(Room.roomKtx)
+    implementation(Room.roomRuntime)
+
+    implementation(Location.playServicesLocation)
+    implementation(Location.placesApi)
+
+
+    //////
+
+
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
