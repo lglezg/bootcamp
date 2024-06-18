@@ -1,10 +1,8 @@
 package com.example.bootcamp.data.repository
 
-import android.telecom.CallScreeningService.CallResponse
-import android.util.Log
 import com.example.bootcamp.data.remote.BootcampApi
-import com.example.bootcamp.domain.repository.HomeRepository
 import com.example.bootcamp.domain.network.response.PageResponse
+import com.example.bootcamp.domain.repository.HomeRepository
 import com.example.bootcamp.utils.NetworkResource
 import retrofit2.Response
 

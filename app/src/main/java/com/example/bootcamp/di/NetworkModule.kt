@@ -1,7 +1,6 @@
 package com.example.bootcamp.di
 
 import android.content.Context
-import com.example.bootcamp.BuildConfig
 import com.example.bootcamp.data.remote.BootcampApi
 import dagger.Module
 import dagger.Provides
