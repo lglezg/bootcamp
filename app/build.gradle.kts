@@ -82,6 +82,9 @@ dependencies {
 
     implementation(Coil.coilCompose)
 
+    implementation(Compose.composeNavigation)
+    implementation(Compose.composeHiltNavigation)
+
     //kapt(Room.roomCompiler)
     implementation(Room.roomKtx)
     implementation(Room.roomRuntime)
